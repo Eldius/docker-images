@@ -55,10 +55,4 @@ RUN mkdir /home/gitpod/.bashrc.d && \
 
 #USER root
 
-# merge dpkg status files
-RUN cp /var/lib/dpkg/status /tmp/dpkg-status \
-    && for i in $(ls /var/lib/apt/dazzle-marks/*.status); do /usr/bin/dazzle-util debian dpkg-status-merge /tmp/dpkg-status $i > /tmp/dpkg-status; done \
-    && cp -f /var/lib/dpkg/status /var/lib/dpkg/status-old \
-    && cp -f /tmp/dpkg-status /var/lib/dpkg/status
-
 USER gitpod
