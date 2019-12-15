@@ -11,6 +11,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Gitpod Java Workspace Docker image
-      run: docker build ./gitpod-java/ --file Dockerfile --tag gitpod-java-workspace:$(date +%s)
+      run: docker build ./gitpod-java/ --tag gitpod-java-workspace:$(date +%s)
     - name: Tag Buil Publish Docker
       uses: AhnSeongHyun/action-tag-docker-build-push@v1.0.0
