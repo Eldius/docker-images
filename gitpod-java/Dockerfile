@@ -48,12 +48,12 @@ RUN mkdir /home/gitpod/.bashrc.d && \
 
 ### Java ###
 ## Place '.gradle' and 'm2-repository' in /workspace because (1) that's a fast volume, (2) it survives workspace-restarts and (3) it can be warmed-up by pre-builds.
-LABEL dazzle/layer=lang-java
-LABEL dazzle/test=tests/lang-java.yaml
-USER gitpod
+#LABEL dazzle/layer=lang-java
+#LABEL dazzle/test=tests/lang-java.yaml
 
+#USER gitpod
 
-USER root
+#USER root
 
 # merge dpkg status files
 RUN cp /var/lib/dpkg/status /tmp/dpkg-status \
