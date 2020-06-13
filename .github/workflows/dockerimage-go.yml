@@ -24,9 +24,11 @@ jobs:
         path: ./gitpod-go1.14/
         # Path to the Dockerfile (Default is '{path}/Dockerfile')
         dockerfile: ./gitpod-go1.14/Dockerfile
-        # Always attempt to pull a newer version of the image
-        always_pull: true
         # Comma-delimited list of labels to add to the built image
         labels: gitpod, go, go1.14
         # Whether to push the image
         push: true
+        # Always attempt to pull a newer version of the image
+        always_pull: true
+        # Automatically tags the built image with the git short SHA as per the readme
+        tag_with_sha: true
