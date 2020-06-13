@@ -1,0 +1,32 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v1
+
+    - name: Build and push Gitpod Java 8 Docker image
+      uses: docker/build-push-action@v1.1.0
+      with:
+        # Username used to log in to a Docker registry. If not set then no login will occur
+        username: ${{ secrets.DOCKER_USERNAME }}
+        # Password or personal access token used to log in to a Docker registry. If not set then no login will occur
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        # Docker repository to tag the image with
+        repository: eldius/gitpod-java-workspace
+        # Comma-delimited list of tags. These will be added to the registry/repository to form the image's tags
+        tags: latest
+        # Path to the build context
+        path: ./gitpod-java/
+        # Path to the Dockerfile (Default is '{path}/Dockerfile')
+        dockerfile: ./gitpod-java/Dockerfile
+        # Always attempt to pull a newer version of the image
+        always_pull: true
+        # Comma-delimited list of labels to add to the built image
+        labels: gitpod, java, java8
+        # Whether to push the image
+        push: true
