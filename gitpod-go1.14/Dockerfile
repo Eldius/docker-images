@@ -35,11 +35,18 @@ RUN rm -rf /home/gitpod/go && \
         github.com/davidrjenni/reftools/cmd/fillstruct \
         github.com/godoctor/godoctor && \
     GO111MODULE=on go get -u -v \
-        golang.org/x/tools/gopls@latest && \
-    go get -u -v -d github.com/stamblerre/gocode && \
+        golang.org/x/tools/gopls@latest ; \
+    go get -u -v -d github.com/stamblerre/gocode ; \
     go build -o $GOPATH/bin/gocode-gomod github.com/stamblerre/gocode && \
-    rm -rf $GOPATH/src && \
-    sudo rm -rf $GOPATH/pkg && \
+    rm -rf $GOPATH/src ; \
+    sudo rm -rf $GOPATH/pkg ; \
     rm -rf /home/gitpod/.cache/go
 
 USER gitpod
+
+# Install custom tools, runtime, etc. using apt-get
+# For example, the command below would install "bastet" - a command line tetris clone:
+#
+# RUN sudo apt-get -q update && #     sudo apt-get install -yq bastet && #     sudo rm -rf /var/lib/apt/lists/*
+#
+# More information: https://www.gitpod.io/docs/config-docker/
