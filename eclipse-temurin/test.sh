@@ -1,18 +1,20 @@
-FROM alpine:3.17
+#!/bin/bash
 
-ENV JAVA_HOME /opt/java/openjdk
-ENV PATH $JAVA_HOME/bin:$PATH
+export JAVA_HOME=/opt/java/openjdk
+export PATH=$JAVA_HOME/bin:$PATH
 
 # Default to UTF-8 file.encoding
-ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
+export LANG='en_US.UTF-8'
+export LANGUAGE='en_US:en'
+export LC_ALL='en_US.UTF-8'
 
 # fontconfig and ttf-dejavu added to support serverside image generation by Java programs
-RUN apk add --no-cache fontconfig libretls musl-locales musl-locales-lang ttf-dejavu tzdata zlib libc6-compat \
+apk add --no-cache fontconfig libretls musl-locales musl-locales-lang ttf-dejavu tzdata zlib \
     && rm -rf /var/cache/apk/*
 
-ENV JAVA_VERSION jdk-17.0.6+10
+export JAVA_VERSION=jdk-17.0.6+10
 
-RUN set -eux; \
+set -eux; \
     ARCH="$(apk --print-arch)"; \
     case "${ARCH}" in \
        amd64|x86_64) \
@@ -39,12 +41,10 @@ RUN set -eux; \
           ; \
     rm -f /tmp/openjdk.tar.gz ${JAVA_HOME}/src.zip;
 
-RUN ls -lha $JAVA_HOME
+ls -lha $JAVA_HOME
 
-RUN echo Verifying install ... \
+echo Verifying install ... \
     && fileEncoding="$(echo 'System.out.println(System.getProperty("file.encoding"))' | jshell -s -)"; [ "$fileEncoding" = 'UTF-8' ]; rm -rf ~/.java \
     && echo javac --version && javac --version \
     && echo java --version && java --version \
     && echo Complete.
-
-CMD ["jshell"]
