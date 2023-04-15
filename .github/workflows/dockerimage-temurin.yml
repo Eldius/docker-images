@@ -1,4 +1,4 @@
-name: Docker Image Go1.14
+name: Docker Image Eclipse Temurin
 
 on:
   push:
